@@ -21,6 +21,8 @@ Real-world phishing sample analysis
 | URLScan.io | urlscan.io | Live URL scanning |
 
 > **Note:** CyberChef decoder requires no API key as it runs fully offline as a built-in module.
+> 
+<img width="901" height="358" alt="Screenshot 2026-03-17 223716" src="https://github.com/user-attachments/assets/860db069-6f71-4fe5-a7fa-297d784adbd7" />
 
 
 ## <ins>Architecture</ins>
