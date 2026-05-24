@@ -143,14 +143,15 @@ Together they form the three pillars of email authentication. If all three fail 
 
 ### 🧪<ins>Real-World Results</ins>
 All samples sourced from the phishing_pot public repository are real captured phishing emails.  
-Sample	Verdict	Score	Key Findings  
-Microsoft Account Alert	🚨 MALICIOUS	100	Display name spoofing, SPF fail, raw IP in URL, AbuseIPDB 100%  
-Fake Microsoft Sign-in	🚨 MALICIOUS	100	VT domain 6 detections, Reply-To mismatch (Gmail)  
-ADAC Auto Promotion	🚨 MALICIOUS	100	Raw IP URLs, AbuseIPDB 50%, OTX flagged, Seoul IP  
-Newsletter (Legitimate)	✅ CLEAN	0	SPF/DKIM/DMARC all passed, no IOCs flagged  
-German Prize Scam	🚨 MALICIOUS	100	SPF fail, Moscow IP (AS48347), superkoran.info VT flagged  
-Rossmann Fake Promo	🚨 MALICIOUS	100	URL flagged 8/98 VT engines, malicious T.co shortener  
-SmartPay Invoice	⚠️ SUSPICIOUS	45	Homoglyph attack — Cyrillic characters impersonating Latin letters  
+| Sample | Verdict | Score | Key Findings | 
+|------- |---------|-------|--------------  
+| Microsoft Account Alert | 🚨 MALICIOUS | 100 | Display name spoofing, SPF fail, raw IP in URL, AbuseIPDB 100% |  
+| Fake Microsoft Sign-in | 🚨 MALICIOUS | 100 | VT domain 6 detections, Reply-To mismatch (Gmail) |  
+| ADAC Auto Promotion | 🚨 MALICIOUS | 100 | Raw IP URLs, AbuseIPDB 50%, OTX flagged, Seoul IP |  
+| Newsletter (Legitimate) | ✅ CLEAN | 0	| SPF/DKIM/DMARC all passed, no IOCs flagged |  
+| German Prize Scam | 🚨 MALICIOUS	| 100 | SPF fail, Moscow IP (AS48347), superkoran.info VT flagged |  
+| Rossmann Fake Promo | 🚨 MALICIOUS | 100 | URL flagged 8/98 VT engines, malicious T.co shortener |  
+| SmartPay Invoice | ⚠️ SUSPICIOUS	| 45 | Homoglyph attack, Cyrillic characters impersonating Latin letters |  
 
 ### Notable Finding - Homoglyph Attack
 Sample `sample-5113` demonstrated a sophisticated homoglyph attack where the attacker used Cyrillic Unicode characters visually identical to Latin letters to fake the display name "SmartPay InvoicePPL". The tool flagged this via display name analysis despite the characters appearing legitimate at a glance.  
@@ -168,27 +169,6 @@ Multi-source enrichment consistently corroborated verdicts across independent so
 
 ---
 
-### 📁 Project Structure
-```
-phish-analyzer/
-├── phish_analyzer.py          # Main entry point
-├── config.json.example        # API key template (keys not included)
-├── requirements.txt           # Python dependencies
-├── splunk_integration.conf    # Splunk forwarder configuration
-├── modules/
-│   ├── header_parser.py       # Email header forensics
-│   ├── ioc_extractor.py       # URL/IP/domain extraction
-│   ├── vt_checker.py          # VirusTotal API integration
-│   ├── cyberchef_decoder.py   # Obfuscation decoder (Base64, URL encoding, Punycode, Hex, Unicode, ROT13, fromCharCode)
-│   ├── osint_enrichment.py    # AbuseIPDB, OTX, URLScan, IPInfo, PhishTank
-│   ├── indicator_engine.py    # Risk scoring and verdict engine
-│   └── report_generator.py   # Report output + Splunk log
-├── samples/
-│   └── test_phish.eml         # Sample phishing email for testing
-├── reports/                   # Generated reports (auto-created)
-└── FINDINGS.md                # Analysis results summary
-```
----
 ### Splunk Integration
 Add to Splunk Universal Forwarder `inputs.conf`:
 ```
